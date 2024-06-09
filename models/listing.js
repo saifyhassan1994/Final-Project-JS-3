@@ -38,17 +38,17 @@ const listingSchema = new Schema({
         enum: ['Trending', 'Rooms', 'Iconic Cities', 'Mountains', 'Castles', 'Amazing Pools'],
         
     },
-    geometry: {   // this is geojson format to store coordinates
-        type: {
-          type: String,
-          enum: ['Point'], // 'location.type' must be 'Point'
-          required: true
-        },
-        coordinates: {
-          type: [Number], // since we want to store the cooordinates of longitude and latitude which is two numbers thats why we will array to store two numbers.
-          required: true,
-        },
-      }, 
+    // geometry: {   // this is geojson format to store coordinates for map
+    //     type: {
+    //       type: String,
+    //       enum: ['Point'], // 'location.type' must be 'Point'
+    //       required: true
+    //     },
+    //     coordinates: {
+    //       type: [Number], // since we want to store the cooordinates of longitude and latitude which is two numbers thats why we will array to store two numbers.
+    //       required: true,
+    //     },
+    //   }, 
 
 });
 
