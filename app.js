@@ -36,11 +36,11 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 
 
- const MONGO_URL = "mongodb://127.0.0.1:27017/AIRBNB";
-// const dbUrl = process.env.ATLASDB_URL
+//  const MONGO_URL = "mongodb://127.0.0.1:27017/AIRBNB";
+const dbUrl = process.env.ATLASDB_URL
 async function main() {
-    await mongoose.connect(MONGO_URL);
-    // await mongoose.connect(dbUrl);
+    // await mongoose.connect(MONGO_URL);
+    await mongoose.connect(dbUrl);
   }
 
  main()
@@ -52,7 +52,19 @@ async function main() {
   });
 
 
+  const store = MongoStore.create({     // to store mongo sessions in Atlas Database
+    mongoUrl: dbUrl,  // to store url of Atlas Database
+    crypto: {      // crypto is a function which will encrypt "secret"
+        secret: process.env.SECRET,  
+    },
+    touchAfter: 24 * 3600,   // session will be stored for "one day".
+})
 
+
+
+store.on("error", () => {  // to check if there is an array in "MONGO SESSION STORE"
+    console.log("ERROR IN MONGO SESSION STORE", err)
+});
 
 
 
